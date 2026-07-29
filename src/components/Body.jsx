@@ -13,8 +13,10 @@ const Body = () => {
   const dispatch = useDispatch();
   const fetchUser = async () => {
     try {
-      const user = await axios.get(BASE_URL + "/profile/view");
-      dispatch(addUser(user));
+      const res = await axios.get(BASE_URL + "/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(addUser(res.data?.data));
       navigate("/");
     } catch (err) {
       console.error(err);
@@ -24,7 +26,7 @@ const Body = () => {
 
   useEffect(() => {
     if (!user) fetchUser();
-  }, []);
+  }, [user]);
   return (
     <div>
       <Navbar />

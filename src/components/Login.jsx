@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -23,7 +24,14 @@ const Login = () => {
       dispatch(addUser(res.data?.data));
       navigate("/");
     } catch (err) {
-      console.log(err.message);
+      console.error(err);
+      if (err.response) {
+        setError(err.response.data.message);
+      } else if (err.request) {
+        setError("Unable to connect to the server");
+      } else {
+        setError("Something went wrong");
+      }
     }
   };
   return (
@@ -48,7 +56,7 @@ const Login = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-
+        {error && <p className="text-red-400">{error}</p>}
         <button
           className="btn btn-neutral text-black bg-white mt-4"
           onClick={handleLogin}
