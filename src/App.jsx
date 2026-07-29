@@ -1,16 +1,24 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "./assets/vite.svg";
-import heroImg from "./assets/hero.png";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Body from "./components/Body";
+import Login from "./components/Login";
+import Profile from "./components/Profile";
+import { Provider } from "react-redux";
+import store from "./app/store";
+import Feed from "./components/Feed";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <h1 class="text-3xl font-bold ">Hello world!</h1>
-    </>
+    <Provider store={store}>
+      <BrowserRouter basename="/">
+        <Routes>
+          <Route path="/" element={<Body />}>
+            <Route path="/" element={<Feed />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </Provider>
   );
 }
 
