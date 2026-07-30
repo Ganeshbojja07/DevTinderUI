@@ -4,6 +4,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../constants";
 import { removeUser } from "../app/userSlice";
+import { removeConnections } from "../app/connectionSlice";
+import { removeRequest, removeRequests } from "../app/requestSlice";
+import { removeFeed } from "../app/feedSlice";
 
 const Navbar = () => {
   const user = useSelector((store) => store.user);
@@ -19,6 +22,9 @@ const Navbar = () => {
         },
       );
       dispatch(removeUser(null));
+      dispatch(removeConnections());
+      dispatch(removeRequests());
+      dispatch(removeFeed());
     } catch (err) {
       console.error(err);
     }
@@ -56,7 +62,16 @@ const Navbar = () => {
                 <li>
                   <Link to="/profile" className="justify-between">
                     Profile
-                    <span className="badge">New</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/connections" className="justify-between">
+                    Connections
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/requests" className="justify-between">
+                    Requests
                   </Link>
                 </li>
                 <li>

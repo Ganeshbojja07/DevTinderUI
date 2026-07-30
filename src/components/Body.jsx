@@ -17,7 +17,7 @@ const Body = () => {
         withCredentials: true,
       });
       dispatch(addUser(res.data?.data));
-      navigate("/");
+      // navigate("/");
     } catch (err) {
       console.error(err);
       if (err.status === 401) navigate("/login");
@@ -28,10 +28,10 @@ const Body = () => {
     if (!user) fetchUser();
   }, [user]);
   return (
-    <div>
+    <div className="mb-10">
       <Navbar />
       <Outlet />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
