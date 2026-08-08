@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import PlanCard from "./PlanCard";
+import axios from "axios";
 
 const plans = [
   {
