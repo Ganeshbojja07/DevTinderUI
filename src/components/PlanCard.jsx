@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const PlanCard = ({ plan }) => {
+const PlanCard = ({ plan, verifyPayment }) => {
   const handleBuy = async () => {
     try {
       const res = await axios.post(
@@ -11,7 +11,7 @@ const PlanCard = ({ plan }) => {
         },
         { withCredentials: true },
       );
-      const { keyId, amount, currency, orderId,notes } = res.data?.data;
+      const { keyId, amount, currency, orderId, notes } = res.data?.data;
 
       const options = {
         key: keyId, // Replace with your Razorpay key_id
@@ -25,6 +25,7 @@ const PlanCard = ({ plan }) => {
           email: notes?.email,
           contact: "",
         },
+        handler: verifyPayment,
         theme: {
           color: "#bb92f8",
         },

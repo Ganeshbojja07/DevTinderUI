@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PlanCard from "./PlanCard";
 
 const plans = [
@@ -26,12 +26,41 @@ const plans = [
 ];
 
 const Premium = () => {
+  const [isPremium, setIsPremium] = React.useState(false);
+  const verifyPayment = async () => {
+    try {
+      const res = await axios.get(
+        import.meta.env.VITE_BASE_URL + "/payment/status",
+        { withCredentials: true },
+      );
+      if (res.data?.isPremium) {
+        setIsPremium(true);
+      }
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    verifyPayment();
+  }, []);
+
   return (
-    <div className="flex justify-center item-center gap-10 mt-10">
-      {plans.map((plan) => (
-        <PlanCard key={plan.planId} plan={plan} />
-      ))}
-    </div>
+    <>
+      {isPremium ? (
+        <p className="text-green-500">You are a premium user!</p>
+      ) : (
+        <div className="flex justify-center item-center gap-10 mt-10">
+          {plans.map((plan) => (
+            <PlanCard
+              key={plan.planId}
+              plan={plan}
+              verifyPayment={verifyPayment}
+            />
+          ))}
+        </div>
+      )}
+    </>
   );
 };
 
