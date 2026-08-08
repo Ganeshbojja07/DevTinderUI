@@ -1,7 +1,6 @@
 import axios from "axios";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { BASE_URL } from "../constants";
 import { addConnections } from "../app/connectionSlice";
 import ConnectionCard from "./ConnectionCard";
 
@@ -11,7 +10,7 @@ const Connections = () => {
 
   const getConnections = async () => {
     try {
-      const res = await axios.get(BASE_URL + "/users/connections", {
+      const res = await axios.get(import.meta.env.VITE_BASE_URL + "/users/connections", {
         withCredentials: true,
       });
       dispatch(addConnections(res?.data?.data));

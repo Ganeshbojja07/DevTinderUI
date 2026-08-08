@@ -1,8 +1,6 @@
 import axios from "axios";
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../constants";
 import { removeUser } from "../app/userSlice";
 import { removeConnections } from "../app/connectionSlice";
 import { removeRequest, removeRequests } from "../app/requestSlice";
@@ -15,7 +13,7 @@ const Navbar = () => {
   const onLogout = async () => {
     try {
       await axios.post(
-        BASE_URL + "/logout",
+        import.meta.env.VITE_BASE_URL + "/logout",
         {},
         {
           withCredentials: true,
@@ -72,6 +70,11 @@ const Navbar = () => {
                 <li>
                   <Link to="/requests" className="justify-between">
                     Requests
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/premium" className="justify-between">
+                    Premium
                   </Link>
                 </li>
                 <li>

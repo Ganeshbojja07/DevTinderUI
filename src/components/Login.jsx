@@ -2,7 +2,6 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { addUser } from "../app/userSlice";
-import { BASE_URL } from "../constants";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -18,7 +17,7 @@ const Login = () => {
     setError("");
     try {
       const res = await axios.post(
-        BASE_URL + "/login",
+        import.meta.env.VITE_BASE_URL + "/login",
         {
           email,
           password,
@@ -43,7 +42,7 @@ const Login = () => {
     setError("");
     try {
       const res = await axios.post(
-        BASE_URL + "/signup",
+        import.meta.env.VITE_BASE_URL + "/signup",
         {
           firstName,
           lastName,

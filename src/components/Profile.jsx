@@ -2,8 +2,6 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../app/userSlice";
-import { BASE_URL } from "../constants";
-import { useNavigate } from "react-router-dom";
 import UserCard from "./UserCard";
 
 const genderCategories = [
@@ -28,7 +26,7 @@ const Profile = () => {
   const handleSaveProfile = async () => {
     try {
       const res = await axios.patch(
-        BASE_URL + "/profile/edit",
+        import.meta.env.VITE_BASE_URL + "/profile/edit",
         {
           firstName,
           lastName,

@@ -1,6 +1,4 @@
 import axios from "axios";
-import React from "react";
-import { BASE_URL } from "../constants";
 import { useDispatch } from "react-redux";
 import { removeRequest } from "../app/requestSlice";
 
@@ -15,7 +13,7 @@ const ConnectionCard = ({
   const handleRequest = async (status) => {
     try {
       const res = await axios.post(
-        BASE_URL + "/connectionRequest/review/" + status + "/" + requestId,
+        import.meta.env.VITE_BASE_URL + "/connectionRequest/review/" + status + "/" + requestId,
         {},
         { withCredentials: true },
       );
